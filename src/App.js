@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Carlist from './components/Carlist';
+import Customerlist from './components/Customerlist'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -11,11 +11,11 @@ function App() {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6">
-            Car Shop
+            Personal Trainer
           </Typography>
         </Toolbar>
       </AppBar>
-      <Carlist />
+      <Customerlist />
     </div>
   );
 }
