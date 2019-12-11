@@ -4,6 +4,7 @@ import 'react-table-v6/react-table.css';
 import Button from '@material-ui/core/Button';
 import Addcustomer from './Addcustomer';
 import Editcustomer from './Editcustomer';
+import Addtraining from '../training/Addtraining';
 
 
 export default function Customerlist() {
@@ -49,6 +50,22 @@ export default function Customerlist() {
         .catch (err => console.error(err))
     }
 
+
+
+    const saveTraining = (training) => {
+        fetch('https://customerrest.herokuapp.com/api/trainings', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }, 
+            body: JSON.stringify(training)
+        })
+        .then(res => fetchData())
+        .catch (err => console.error(err))
+    }
+
+
+
     const columns = [
         {
             Header: 'First name',
@@ -78,6 +95,15 @@ export default function Customerlist() {
             Header: 'Phone',
             accessor: 'phone'
         },
+
+        {
+            sortable: false,
+            filterable: false,
+            width:150,
+            accessor: 'links[2].href',
+            Cell: row => 
+            <Addtraining saveTraining = {saveTraining}/>
+        },
         {
             sortable: false,
             filterable: false,
@@ -89,7 +115,7 @@ export default function Customerlist() {
             sortable: false,
             filterable: false,
             width:100,
-            accessor: 'links.href',
+            accessor: 'links[1].href',
             Cell: row => 
             <div>
             <Button size = "small" color="secondary" onClick ={() => deleteCustomer(row.value)}>Delete</Button>
@@ -108,3 +134,4 @@ export default function Customerlist() {
         </div>
     );
 }
+
